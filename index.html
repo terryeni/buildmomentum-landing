@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Build Momentum — The gym streak you can't break</title>
+<meta name="description" content="A dead-simple gym tracker built around a streak that counts by the week, so one missed day never sets you back to zero. Auto-tracks your PRs. No account, fully private. On iPhone." />
+<link rel="icon" href="https://apps.apple.com/favicon.ico" />
+<!-- Open Graph -->
+<meta property="og:title" content="Build Momentum — The gym streak you can't break" />
+<meta property="og:description" content="A gym tracker built around a forgiving weekly streak. Auto PRs, visible progress, no account, fully private. Free on iPhone." />
+<meta property="og:type" content="website" />
+<style>
+  :root{
+    --bg:#0B0B0F; --panel:#131319; --panel2:#1A1A22;
+    --text:#F4F5F7; --muted:#9A9CA8; --line:#262633;
+    --volt:#D7FF3E; --volt-dim:#acd028; --accent:#2E86AB;
+    --radius:18px; --maxw:1080px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .glow{position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(620px 360px at 78% -8%, rgba(215,255,62,.16), transparent 60%),
+      radial-gradient(540px 420px at 8% 8%, rgba(46,134,171,.18), transparent 62%);}
+
+  /* NAV */
+  nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:22px 22px;max-width:var(--maxw);margin:0 auto}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:18px}
+  .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(150deg,var(--volt),var(--volt-dim));display:grid;place-items:center;color:#0B0B0F;font-weight:900;font-size:18px;box-shadow:0 0 22px rgba(215,255,62,.35)}
+  .nav-cta{font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:9px 15px;border-radius:11px;transition:.2s}
+  .nav-cta:hover{color:var(--text);border-color:var(--volt)}
+
+  /* HERO */
+  header{position:relative;padding:54px 0 30px}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--volt);background:rgba(215,255,62,.08);border:1px solid rgba(215,255,62,.25);padding:6px 13px;border-radius:999px;margin-bottom:22px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--volt);box-shadow:0 0 9px var(--volt)}
+  h1{font-size:clamp(38px,7vw,68px);line-height:1.02;letter-spacing:-.035em;font-weight:850;max-width:14ch}
+  h1 .hl{background:linear-gradient(120deg,var(--volt),#eaffb0);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin-top:22px;font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:54ch}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:34px}
+  .btn-store{display:inline-flex;align-items:center;gap:11px;background:var(--volt);color:#0B0B0F;font-weight:800;font-size:16px;padding:15px 24px;border-radius:14px;text-decoration:none;transition:.2s;box-shadow:0 8px 30px rgba(215,255,62,.22)}
+  .btn-store:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(215,255,62,.34)}
+  .btn-ghost{display:inline-flex;align-items:center;gap:9px;color:var(--text);font-weight:600;font-size:15px;padding:14px 20px;border-radius:14px;text-decoration:none;border:1px solid var(--line);transition:.2s}
+  .btn-ghost:hover{border-color:var(--volt);color:var(--volt)}
+  .micro{margin-top:16px;font-size:13.5px;color:var(--muted)}
+  .micro b{color:var(--text);font-weight:600}
+
+  /* TRUST STRIP */
+  .trust{position:relative;z-index:2;margin-top:46px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}
+  .trust ul{display:flex;flex-wrap:wrap;gap:10px 26px;list-style:none;justify-content:center}
+  .trust li{font-size:13.5px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:8px}
+  .trust li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--volt-dim)}
+
+  /* SECTION */
+  section{position:relative;z-index:2;padding:66px 0}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--volt-dim)}
+  h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.03em;font-weight:800;margin-top:12px;max-width:20ch}
+  .lead{color:var(--muted);font-size:17px;margin-top:14px;max-width:60ch}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;transition:.25s}
+  .card:hover{border-color:rgba(215,255,62,.4);transform:translateY(-3px)}
+  .card .ic{width:44px;height:44px;border-radius:12px;background:rgba(215,255,62,.1);border:1px solid rgba(215,255,62,.22);display:grid;place-items:center;font-size:22px;margin-bottom:18px}
+  .card h3{font-size:19px;font-weight:750;letter-spacing:-.01em}
+  .card p{color:var(--muted);font-size:15px;margin-top:9px}
+
+  /* PROOF */
+  .proof{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:40px 30px;text-align:center}
+  .proof .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+  .quote{background:var(--bg);border:1px dashed var(--line);border-radius:16px;padding:22px 20px;text-align:left}
+  .quote p{font-size:15px;color:var(--text)}
+  .quote .who{margin-top:14px;font-size:13px;color:var(--muted)}
+  .placeholder-tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--volt-dim);font-weight:700}
+
+  /* WAITLIST */
+  .waitlist{background:radial-gradient(700px 300px at 50% 0%,rgba(215,255,62,.1),transparent 60%),linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:46px 30px;text-align:center}
+  .waitlist h2{margin:0 auto;max-width:22ch}
+  .waitlist .lead{margin:14px auto 0}
+  form{display:flex;flex-wrap:wrap;gap:11px;justify-content:center;margin-top:28px}
+  input[type=email]{flex:1;min-width:240px;max-width:360px;background:var(--bg);border:1px solid var(--line);color:var(--text);font-size:15px;padding:15px 17px;border-radius:13px;outline:none;transition:.2s}
+  input[type=email]:focus{border-color:var(--volt)}
+  button{background:var(--volt);color:#0B0B0F;font-weight:800;font-size:15px;padding:15px 26px;border:none;border-radius:13px;cursor:pointer;transition:.2s}
+  button:hover{transform:translateY(-2px)}
+  button:disabled{opacity:.6;cursor:not-allowed;transform:none}
+  .formnote{font-size:12.5px;color:var(--muted);margin-top:14px}
+  .msg{margin-top:16px;font-size:15px;font-weight:600;min-height:22px}
+  .msg.ok{color:var(--volt)}
+  .msg.err{color:#ff7a7a}
+
+  /* FOOTER */
+  footer{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:30px;padding:34px 0 50px}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;align-items:center}
+  .foot small{color:var(--muted);font-size:13px}
+  .foot a{color:var(--muted);text-decoration:none;font-size:13px;margin-left:18px}
+  .foot a:hover{color:var(--volt)}
+
+  @media(max-width:820px){
+    .cards,.proof .quotes{grid-template-columns:1fr}
+    header{padding:34px 0 10px}
+  }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+
+<nav>
+  <div class="brand"><span class="mark">M</span> Build Momentum</div>
+  <a class="nav-cta" href="#get">Get the app</a>
+</nav>
+
+<header class="wrap">
+  <span class="pill"><span class="dot"></span> Now on the App Store — free on iPhone</span>
+  <h1>The gym streak <span class="hl">you can't break.</span></h1>
+  <p class="sub">Most trackers punish you the second you miss a day — so you quit. Build Momentum counts your streak <b style="color:var(--text)">by the week</b>. Rest days never break it, and a freeze covers one bad week. It auto-catches your PRs and shows your lifts trending up — so progress is finally <b style="color:var(--text)">visible</b>.</p>
+  <div class="cta-row" id="get">
+    <a class="btn-store" href="https://apps.apple.com/app/id6780683361" target="_blank" rel="noopener"> Download on the App Store</a>
+    <a class="btn-ghost" href="#waitlist">On Android? Join the waitlist →</a>
+  </div>
+  <p class="micro">No account. <b>Fully offline.</b> No ads, no tracking. Your data never leaves your phone.</p>
+</header>
+
+<div class="trust"><div class="wrap"><ul>
+  <li>No account needed</li>
+  <li>Works fully offline</li>
+  <li>No ads · no tracking</li>
+  <li>Encrypted on-device</li>
+  <li>CSV export anytime</li>
+  <li>Privacy label: “Data Not Collected”</li>
+</ul></div></div>
+
+<section class="wrap">
+  <span class="eyebrow">Why you keep falling off</span>
+  <h2>Three things kill a gym habit. Momentum fixes each one.</h2>
+  <p class="lead">It does a few things, and does them well. No social feed, no 500-exercise encyclopedia, no AI coach — just the loop that actually keeps you training.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="ic">🔥</div>
+      <h3>A streak that forgives</h3>
+      <p>It counts by the <b style="color:var(--text)">week</b>, not the day. Rest days never break it, and a built-in freeze saves your streak through one off week. Miss Tuesday? You're still on track.</p>
+    </div>
+    <div class="card">
+      <div class="ic">📈</div>
+      <h3>Progress you can see</h3>
+      <p>Auto-detected PRs with a little celebration. Per-lift top set and estimated 1RM trending over time. Weekly volume vs last week. The numbers go up — and you watch them.</p>
+    </div>
+    <div class="card">
+      <div class="ic">⚡</div>
+      <h3>Two taps to logged</h3>
+      <p>Open to <b style="color:var(--text)">“Today's session”</b> — one recommended workout, weights pre-filled from last time. Start and log a set in about two taps. Decision fatigue, gone.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="proof">
+    <span class="placeholder-tag">Founding lifters · early access</span>
+    <h2 style="margin:14px auto 0;max-width:18ch">Built with real lifters, before launch.</h2>
+    <p class="lead" style="margin:14px auto 0">We're onboarding a small group of founding lifters and gathering their words. Their quotes land here.</p>
+    <div class="quotes">
+      <div class="quote"><p>“Quote from a founding lifter goes here once the first cohort has trained for a few weeks.”</p><div class="who">— Founding lifter <span class="placeholder-tag">placeholder</span></div></div>
+      <div class="quote"><p>“A second testimonial slot — kept honest and empty until we have a real one.”</p><div class="who">— Founding lifter <span class="placeholder-tag">placeholder</span></div></div>
+      <div class="quote"><p>“Third placeholder. No invented reviews — real proof only.”</p><div class="who">— Founding lifter <span class="placeholder-tag">placeholder</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="waitlist">
+  <div class="waitlist">
+    <span class="eyebrow">Stay in the loop</span>
+    <h2>On Android, or want launch updates?</h2>
+    <p class="lead">Build Momentum is on iPhone today. Drop your email and we'll tell you when Android lands and when big updates ship. No spam, no sharing — one email when there's real news.</p>
+    <form id="waitlist-form" novalidate>
+      <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required aria-label="Email address" />
+      <button type="submit" id="submitbtn">Join the waitlist</button>
+    </form>
+    <div class="msg" id="msg" role="status" aria-live="polite"></div>
+    <p class="formnote">We store your email only to notify you. We never sell it, and you can ask us to delete it anytime.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot">
+    <small>Build Momentum — an <b style="color:var(--text)">Onarvo</b> product. © 2026.</small>
+    <div>
+      <a href="https://apps.apple.com/app/id6780683361" target="_blank" rel="noopener">App Store</a>
+      <a href="#waitlist">Waitlist</a>
+      <a href="#get">Get the app</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var form = document.getElementById('waitlist-form');
+    var email = document.getElementById('email');
+    var btn = document.getElementById('submitbtn');
+    var msg = document.getElementById('msg');
+    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Capture target kept out of plain text to deter scrapers. Capture only — no email is ever auto-sent to signups.
+    var dest = atob('dGVycnllbmlnYm9uamFpeWVAZ21haWwuY29t');
+    function show(t, ok){ msg.textContent = t; msg.className = 'msg ' + (ok ? 'ok':'err'); }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var val = (email.value||'').trim();
+      if(!re.test(val)){ show('Please enter a valid email address.', false); return; }
+      btn.disabled = true; btn.textContent = 'Joining…'; show('', true);
+      fetch('https://formsubmit.co/ajax/' + encodeURIComponent(dest), {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({
+          _subject: 'Build Momentum waitlist signup',
+          _template: 'table',
+          email: val,
+          source: 'landing',
+          signed_up_at: new Date().toISOString()
+        })
+      }).then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ return {ok:r.ok, d:d}; }); })
+        .then(function(res){
+          if(res.ok){ form.reset(); show("You're on the list. We'll be in touch when there's real news. 🔥", true); btn.textContent='Joined ✓'; }
+          else { show((res.d && res.d.message) || 'Something went wrong — try again in a moment.', false); btn.disabled=false; btn.textContent='Join the waitlist'; }
+        })
+        .catch(function(){ show('Network error — please try again.', false); btn.disabled=false; btn.textContent='Join the waitlist'; });
+    });
+  })();
+</script>
+</body>
+</html>
