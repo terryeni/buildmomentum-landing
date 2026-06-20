@@ -209,22 +209,27 @@
       var val = (email.value||'').trim();
       if(!re.test(val)){ show('Please enter a valid email address.', false); return; }
       btn.disabled = true; btn.textContent = 'Joining…'; show('', true);
-      fetch('https://formsubmit.co/ajax/' + encodeURIComponent(dest), {
+      function ok(){ form.reset(); show("You're on the list. We'll be in touch when there's real news. 🔥", true); btn.textContent='Joined ✓'; }
+      function fail(t){ show(t || 'Something went wrong — try again in a moment.', false); btn.disabled=false; btn.textContent='Join the waitlist'; }
+      // FormSubmit fallback (works on any static host, e.g. GitHub Pages). Capture only — no email is auto-sent to signups.
+      function formsubmit(){
+        fetch('https://formsubmit.co/ajax/' + encodeURIComponent(dest), {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify({ _subject:'Build Momentum waitlist signup', _template:'table', email: val, source:'landing', signed_up_at:new Date().toISOString() })
+        }).then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ return {ok:r.ok, d:d}; }); })
+          .then(function(res){ if(res.ok){ ok(); } else { fail(res.d && res.d.message); } })
+          .catch(function(){ fail('Network error — please try again.'); });
+      }
+      // Prefer the server-side capture endpoint when present (Vercel serverless -> runtime logs, no activation needed).
+      fetch('/api/waitlist', {
         method:'POST',
         headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body: JSON.stringify({
-          _subject: 'Build Momentum waitlist signup',
-          _template: 'table',
-          email: val,
-          source: 'landing',
-          signed_up_at: new Date().toISOString()
-        })
-      }).then(function(r){ return r.json().catch(function(){return {};}).then(function(d){ return {ok:r.ok, d:d}; }); })
-        .then(function(res){
-          if(res.ok){ form.reset(); show("You're on the list. We'll be in touch when there's real news. 🔥", true); btn.textContent='Joined ✓'; }
-          else { show((res.d && res.d.message) || 'Something went wrong — try again in a moment.', false); btn.disabled=false; btn.textContent='Join the waitlist'; }
-        })
-        .catch(function(){ show('Network error — please try again.', false); btn.disabled=false; btn.textContent='Join the waitlist'; });
+        body: JSON.stringify({ email: val, source: 'landing' })
+      }).then(function(r){
+        if(r.status === 404 || r.status === 405){ formsubmit(); return; } // no serverless host -> fall back
+        if(r.ok){ ok(); } else { r.json().catch(function(){return {};}).then(function(d){ fail(d && d.error); }); }
+      }).catch(function(){ formsubmit(); }); // network/edge error -> fall back
     });
   })();
 </script>
