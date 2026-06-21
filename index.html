@@ -107,6 +107,11 @@
     header{padding:34px 0 10px}
   }
 </style>
+<!-- Vercel Web Analytics: cookieless, no consent banner needed. Auto-active once Web Analytics
+     is toggled on for this project in the Vercel dashboard. Measures pageviews + the custom
+     `waitlist_signup` goal fired below, so we can see the North-Star conversion rate. -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <div class="glow"></div>
@@ -217,7 +222,7 @@
       var val = (email.value||'').trim();
       if(!re.test(val)){ show('Please enter a valid email address.', false); return; }
       btn.disabled = true; btn.textContent = 'Joining…'; show('', true);
-      function ok(){ form.reset(); show("You're on the list. We'll be in touch when there's real news. 🔥", true); btn.textContent='Joined ✓'; }
+      function ok(){ form.reset(); show("You're on the list. We'll be in touch when there's real news. 🔥", true); btn.textContent='Joined ✓'; try{ window.va('event',{name:'waitlist_signup',source:'landing'}); }catch(e){} }
       function fail(t){ show(t || 'Something went wrong — try again in a moment.', false); btn.disabled=false; btn.textContent='Join the waitlist'; }
       // FormSubmit fallback (works on any static host, e.g. GitHub Pages). Capture only — no email is auto-sent to signups.
       function formsubmit(){
