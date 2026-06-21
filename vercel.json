@@ -2,10 +2,12 @@
   "version": 2,
   "builds": [
     { "src": "api/*.js", "use": "@vercel/node" },
-    { "src": "index.html", "use": "@vercel/static" }
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "og-image.png", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/waitlist", "dest": "/api/waitlist.js" },
+    { "src": "/og-image.png", "dest": "/og-image.png" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
