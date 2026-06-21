@@ -1,2 +1,3 @@
-api/
+# NOTE: api/waitlist.js IS tracked — it is the server-side waitlist capture
+# endpoint and must ship with the Vercel deploy. It contains no secrets.
 .DS_Store
