@@ -105,6 +105,16 @@
   .card h3{font-size:19px;font-weight:750;letter-spacing:-.01em}
   .card p{color:var(--muted);font-size:15px;margin-top:9px}
 
+  /* SHOTS */
+  .shots{text-align:center}
+  .shot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px;align-items:start}
+  .shot{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:22px;padding:14px 14px 22px;transition:.25s}
+  .shot:hover{border-color:rgba(215,255,62,.4);transform:translateY(-4px)}
+  .shot img{width:100%;height:auto;border-radius:14px;display:block;border:1px solid var(--line)}
+  .shot figcaption{color:var(--muted);font-size:14px;line-height:1.5;margin-top:15px}
+  .shot figcaption b{color:var(--text);font-weight:700}
+  @media(max-width:820px){.shot-grid{grid-template-columns:1fr;max-width:330px;margin-left:auto;margin-right:auto}}
+
   /* STORY */
   .story{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:40px 36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
   .story-text h2{font-size:clamp(22px,3.2vw,32px);max-width:18ch}
@@ -176,6 +186,26 @@
   <li>CSV export anytime</li>
   <li>Privacy label: “Data Not Collected”</li>
 </ul></div></div>
+
+<section class="wrap shots">
+  <span class="eyebrow">See it in action</span>
+  <h2 style="margin-left:auto;margin-right:auto">The whole app is the loop that keeps you training.</h2>
+  <p class="lead" style="margin:14px auto 0">No setup tour, no clutter. This is what you actually open every session.</p>
+  <div class="shot-grid">
+    <figure class="shot">
+      <img src="shots/home.png" alt="Build Momentum home screen: a 5-week streak and today's pre-filled workout ready to start" width="1206" height="2622" loading="lazy">
+      <figcaption><b>Open straight to today's session.</b> Streak counts by the week, one workout's ready, start in about two taps.</figcaption>
+    </figure>
+    <figure class="shot">
+      <img src="shots/trend.png" alt="Strength trend chart: top-set weight and estimated 1RM climbing over time" width="1206" height="2622" loading="lazy">
+      <figcaption><b>Watch your lifts climb.</b> Top set and estimated 1RM trending up, tracked per exercise.</figcaption>
+    </figure>
+    <figure class="shot">
+      <img src="shots/progress.png" alt="Progress screen: weekly training volume up 4% versus last week, with a list of recent personal records" width="1206" height="2622" loading="lazy">
+      <figcaption><b>The numbers go up.</b> Weekly volume vs last week, with PRs caught automatically.</figcaption>
+    </figure>
+  </div>
+</section>
 
 <section class="wrap">
   <span class="eyebrow">Why you keep falling off</span>
