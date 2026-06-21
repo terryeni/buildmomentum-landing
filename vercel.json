@@ -3,11 +3,17 @@
   "builds": [
     { "src": "api/*.js", "use": "@vercel/node" },
     { "src": "index.html", "use": "@vercel/static" },
-    { "src": "og-image.png", "use": "@vercel/static" }
+    { "src": "og-image.png", "use": "@vercel/static" },
+    { "src": "favicon.svg", "use": "@vercel/static" },
+    { "src": "favicon-32.png", "use": "@vercel/static" },
+    { "src": "apple-touch-icon.png", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/waitlist", "dest": "/api/waitlist.js" },
     { "src": "/og-image.png", "dest": "/og-image.png" },
+    { "src": "/favicon.svg", "dest": "/favicon.svg" },
+    { "src": "/favicon-32.png", "dest": "/favicon-32.png" },
+    { "src": "/apple-touch-icon.png", "dest": "/apple-touch-icon.png" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
