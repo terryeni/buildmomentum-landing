@@ -271,7 +271,7 @@
         var shareWrap = document.getElementById('share-nudge');
         if(shareWrap){ shareWrap.style.display='block'; }
       }
-      function fail(t){ show(t || 'Something went wrong — try again in a moment.', false); btn.disabled=false; btn.textContent='Join the waitlist'; }
+      function fail(t){ show(t || 'Something went wrong — try again in a moment.', false); btn.disabled=false; btn.textContent='Notify me'; }
       // FormSubmit fallback (works on any static host, e.g. GitHub Pages). Capture only — no email is auto-sent to signups.
       function formsubmit(){
         fetch('https://formsubmit.co/ajax/' + encodeURIComponent(dest), {
