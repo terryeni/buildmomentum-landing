@@ -69,13 +69,16 @@
   .card h3{font-size:19px;font-weight:750;letter-spacing:-.01em}
   .card p{color:var(--muted);font-size:15px;margin-top:9px}
 
-  /* PROOF */
-  .proof{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:40px 30px;text-align:center}
-  .proof .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
-  .quote{background:var(--bg);border:1px dashed var(--line);border-radius:16px;padding:22px 20px;text-align:left}
-  .quote p{font-size:15px;color:var(--text)}
-  .quote .who{margin-top:14px;font-size:13px;color:var(--muted)}
-  .placeholder-tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--volt-dim);font-weight:700}
+  /* STORY */
+  .story{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:40px 36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+  .story-text h2{font-size:clamp(22px,3.2vw,32px);max-width:18ch}
+  .story-text p{color:var(--muted);font-size:16px;margin-top:14px;max-width:48ch}
+  .story-text p b{color:var(--text)}
+  .story-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .stat{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px 20px}
+  .stat .n{font-size:clamp(28px,4vw,42px);font-weight:850;letter-spacing:-.03em;color:var(--volt)}
+  .stat p{font-size:13.5px;color:var(--muted);margin-top:6px}
+  @media(max-width:820px){.story{grid-template-columns:1fr}.story-stats{grid-template-columns:1fr 1fr}}
 
   /* WAITLIST */
   .waitlist{background:radial-gradient(700px 300px at 50% 0%,rgba(215,255,62,.1),transparent 60%),linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:46px 30px;text-align:center}
@@ -156,24 +159,29 @@
   </div>
 </section>
 
-<section class="wrap">
-  <div class="proof">
-    <span class="placeholder-tag">Founding lifters · early access</span>
-    <h2 style="margin:14px auto 0;max-width:18ch">Built with real lifters, before launch.</h2>
-    <p class="lead" style="margin:14px auto 0">We're onboarding a small group of founding lifters and gathering their words. Their quotes land here.</p>
-    <div class="quotes">
-      <div class="quote"><p>“Quote from a founding lifter goes here once the first cohort has trained for a few weeks.”</p><div class="who">— Founding lifter <span class="placeholder-tag">placeholder</span></div></div>
-      <div class="quote"><p>“A second testimonial slot — kept honest and empty until we have a real one.”</p><div class="who">— Founding lifter <span class="placeholder-tag">placeholder</span></div></div>
-      <div class="quote"><p>“Third placeholder. No invented reviews — real proof only.”</p><div class="who">— Founding lifter <span class="placeholder-tag">placeholder</span></div></div>
+<section class=”wrap”>
+  <div class=”story”>
+    <div class=”story-text”>
+      <span class=”eyebrow”>Why this exists</span>
+      <h2>I quit the gym four times. It was never motivation.</h2>
+      <p>Every tracker I used had a daily streak. One rest day → streak gone → “well, I've ruined it” → quit by week 3. <b>The streak that was supposed to motivate me was the exact thing making me quit.</b></p>
+      <p style=”margin-top:12px”>The fix was stupidly simple: count consistency by the <b>week</b>, not the day. Hit your sessions for the week — rest days are part of the plan. And stop deciding what to train. Pre-decide, then just start.</p>
+      <p style=”margin-top:12px”>I built Momentum around those two ideas because nothing else did both. <b>It's still working.</b></p>
+    </div>
+    <div class=”story-stats”>
+      <div class=”stat”><div class=”n”>7</div><p>days offline — works anywhere, even with zero signal</p></div>
+      <div class=”stat”><div class=”n”>0</div><p>ads, accounts or data ever leaving your phone</p></div>
+      <div class=”stat”><div class=”n”>1</div><p>session picked for you daily — no decision fatigue</p></div>
+      <div class=”stat”><div class=”n”>∞</div><p>weeks you can keep going — freeze saves one bad week</p></div>
     </div>
   </div>
 </section>
 
 <section class="wrap" id="waitlist">
   <div class="waitlist">
-    <span class="eyebrow">Stay in the loop</span>
-    <h2>On Android, or want launch updates?</h2>
-    <p class="lead">Build Momentum is on iPhone today. Drop your email and we'll tell you when Android lands and when big updates ship. No spam, no sharing — one email when there's real news.</p>
+    <span class="eyebrow">Be first</span>
+    <h2>Get notified when Android lands.</h2>
+    <p class="lead">Build Momentum is iPhone-first. Drop your email and we'll tell you the moment Android ships — plus any major feature releases. One email when there's real news, nothing else.</p>
     <form id="waitlist-form" novalidate>
       <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required aria-label="Email address" />
       <button type="submit" id="submitbtn">Join the waitlist</button>
