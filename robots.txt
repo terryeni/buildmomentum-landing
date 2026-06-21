@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://buildmomentum.app/sitemap.xml
+Sitemap: https://terryeni.github.io/buildmomentum-landing/sitemap.xml
