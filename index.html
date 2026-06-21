@@ -163,7 +163,7 @@
   <p class="sub">Most trackers punish you the second you miss a day — so you quit. Build Momentum counts your streak <b style="color:var(--text)">by the week</b>. Rest days never break it, and a freeze covers one bad week. It auto-catches your PRs and shows your lifts trending up — so progress is finally <b style="color:var(--text)">visible</b>.</p>
   <div class="cta-row" id="get">
     <a class="btn-store" href="https://apps.apple.com/app/id6780683361" target="_blank" rel="noopener"> Download on the App Store</a>
-    <a class="btn-ghost" href="#waitlist">On Android? Join the waitlist →</a>
+    <a class="btn-ghost" href="#waitlist">Get updates &amp; early access →</a>
   </div>
   <p class="micro">No account. <b>Fully offline.</b> No ads, no tracking. Your data never leaves your phone.</p>
 </header>
@@ -220,16 +220,16 @@
 
 <section class="wrap" id="waitlist">
   <div class="waitlist">
-    <span class="eyebrow">Be first</span>
-    <h2>Get notified when Android lands.</h2>
-    <p class="lead">Build Momentum is iPhone-first. Drop your email and we'll tell you the moment Android ships — plus any major feature releases. One email when there's real news, nothing else.</p>
+    <span class="eyebrow">Stay in the loop</span>
+    <h2>New features. Big releases. No noise.</h2>
+    <p class="lead">Get notified when Android ships, when major features drop, and when there's actually something worth sharing. One email when there's real news — nothing else. Already on iOS? We'll keep you first in line.</p>
     <form id="waitlist-form" novalidate>
       <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required aria-label="Email address" />
-      <button type="submit" id="submitbtn">Join the waitlist</button>
+      <button type="submit" id="submitbtn">Notify me</button>
     </form>
     <div class="msg" id="msg" role="status" aria-live="polite"></div>
     <div id="share-nudge" style="display:none;margin-top:1.5rem;text-align:center;">
-      <p style="font-size:0.9rem;color:var(--muted);margin-bottom:0.75rem">Know someone who keeps quitting the gym? Pass it on.</p>
+      <p style="font-size:0.9rem;color:var(--muted);margin-bottom:0.75rem">Know someone who keeps quitting the gym? Send them this.</p>
       <button id="share-btn" style="background:transparent;border:1px solid var(--accent);color:var(--accent);padding:0.5rem 1.25rem;border-radius:6px;font-size:0.875rem;cursor:pointer;font-family:inherit">Share Build Momentum</button>
     </div>
     <p class="formnote">We store your email only to notify you. We never sell it, and you can ask us to delete it anytime.</p>
@@ -264,8 +264,8 @@
       btn.disabled = true; btn.textContent = 'Joining…'; show('', true);
       function ok(){
         form.reset();
-        show("You're on the list. We'll be in touch when there's real news.", true);
-        btn.textContent='Joined ✓';
+        show("You're on the list — we'll only email when there's something real.", true);
+        btn.textContent='You\'re in ✓';
         try{ window.va('event',{name:'waitlist_signup',source:'landing'}); }catch(e){}
         // Post-signup share nudge
         var shareWrap = document.getElementById('share-nudge');
@@ -295,8 +295,8 @@
     // Share nudge wiring
     var shareBtn = document.getElementById('share-btn');
     if(shareBtn){
-      var shareUrl = 'https://apps.apple.com/app/id6780683361';
-      var shareText = 'A gym tracker with a weekly streak that doesn\'t punish rest days. Free, offline, no account. Build Momentum on iOS.';
+      var shareUrl = 'https://terryeni.github.io/buildmomentum-landing/';
+      var shareText = 'A gym tracker with a weekly streak that doesn\'t punish rest days. Free, offline, no account. Build Momentum — iOS now, Android coming.';
       shareBtn.addEventListener('click', function(){
         if(navigator.share){
           navigator.share({ title:'Build Momentum', text:shareText, url:shareUrl }).catch(function(){});
