@@ -153,11 +153,10 @@
     header{padding:34px 0 10px}
   }
 </style>
-<!-- Vercel Web Analytics: cookieless, no consent banner needed. Auto-active once Web Analytics
-     is toggled on for this project in the Vercel dashboard. Measures pageviews + the custom
-     `waitlist_signup` goal fired below, so we can see the North-Star conversion rate. -->
-<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<!-- Vercel Web Analytics loads only when running on Vercel (/_vercel/ path is a Vercel-only runtime route; requesting it from GitHub Pages returns 404 and pollutes the console with a failed network request). When the site moves to Vercel + buildmomentum.app, re-enable the two script tags below. -->
+<!-- <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script> -->
+<!-- <script defer src="/_vercel/insights/script.js"></script> -->
+<script>window.va=window.va||function(){};</script>
 </head>
 <body>
 <div class="glow"></div>
@@ -312,7 +311,10 @@
           .then(function(res){ if(res.ok){ ok(); } else { fail(res.d && res.d.message); } })
           .catch(function(){ fail('Network error — please try again.'); });
       }
-      // Prefer the server-side capture endpoint when present (Vercel serverless -> runtime logs, no activation needed).
+      // Prefer the server-side capture endpoint when running on Vercel (the /api/ route only exists there).
+      // On GitHub Pages or any non-Vercel host, skip straight to FormSubmit to avoid a pointless 404 roundtrip.
+      var onVercel = !window.location.hostname.includes('github.io') && !window.location.hostname.includes('localhost');
+      if(!onVercel){ formsubmit(); return; }
       fetch('/api/waitlist', {
         method:'POST',
         headers:{'Content-Type':'application/json','Accept':'application/json'},
