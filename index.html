@@ -313,11 +313,77 @@
   </div>
 </section>
 
+<section class="wrap" id="faq" style="padding:72px 0 56px">
+  <h2 style="font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:40px;text-align:center">Frequently asked questions</h2>
+  <div style="max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:2px">
+
+    <details style="background:var(--panel);border-radius:12px;overflow:hidden">
+      <summary style="padding:20px 22px;cursor:pointer;list-style:none;font-weight:600;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px">
+        How does the weekly streak work?
+        <span style="flex-shrink:0;font-size:1.4rem;font-weight:300;color:var(--volt);transition:transform .25s" class="faq-icon">+</span>
+      </summary>
+      <div style="padding:0 22px 20px;color:var(--muted);font-size:.93rem;line-height:1.7">
+        Build Momentum counts your streak by the week, not the day. Log at least one session in a calendar week and your streak survives. Rest days, travel, and even a full week off do not break it — a freeze feature saves you one missed week per quarter. This makes the streak something you can realistically hold for months or years, not something a single bad Monday destroys.
+      </div>
+    </details>
+
+    <details style="background:var(--panel);border-radius:12px;overflow:hidden">
+      <summary style="padding:20px 22px;cursor:pointer;list-style:none;font-weight:600;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px">
+        Do I need an account or internet connection?
+        <span style="flex-shrink:0;font-size:1.4rem;font-weight:300;color:var(--volt);transition:transform .25s" class="faq-icon">+</span>
+      </summary>
+      <div style="padding:0 22px 20px;color:var(--muted);font-size:.93rem;line-height:1.7">
+        No account, no internet. Build Momentum is fully offline-first. Your data lives on your device and nowhere else. It works in the gym, in a basement, in aeroplane mode — anywhere. Nothing is synced to a server and there is nothing to log into.
+      </div>
+    </details>
+
+    <details style="background:var(--panel);border-radius:12px;overflow:hidden">
+      <summary style="padding:20px 22px;cursor:pointer;list-style:none;font-weight:600;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px">
+        How are personal records tracked?
+        <span style="flex-shrink:0;font-size:1.4rem;font-weight:300;color:var(--volt);transition:transform .25s" class="faq-icon">+</span>
+      </summary>
+      <div style="padding:0 22px 20px;color:var(--muted);font-size:.93rem;line-height:1.7">
+        Every time you log a set, the app calculates your estimated one-rep max (1RM) and compares it to your previous best for that lift. When you hit a new peak, it flags it as a PR automatically. You can see your strength trend over time for each exercise — so you always know whether your numbers are going in the right direction.
+      </div>
+    </details>
+
+    <details style="background:var(--panel);border-radius:12px;overflow:hidden">
+      <summary style="padding:20px 22px;cursor:pointer;list-style:none;font-weight:600;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px">
+        Is Build Momentum free?
+        <span style="flex-shrink:0;font-size:1.4rem;font-weight:300;color:var(--volt);transition:transform .25s" class="faq-icon">+</span>
+      </summary>
+      <div style="padding:0 22px 20px;color:var(--muted);font-size:.93rem;line-height:1.7">
+        Yes. Free to download on iPhone. No subscription, no paywalled features, no ads. Download it and start your first session in under a minute.
+      </div>
+    </details>
+
+    <details style="background:var(--panel);border-radius:12px;overflow:hidden">
+      <summary style="padding:20px 22px;cursor:pointer;list-style:none;font-weight:600;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px">
+        What makes it different from other gym apps?
+        <span style="flex-shrink:0;font-size:1.4rem;font-weight:300;color:var(--volt);transition:transform .25s" class="faq-icon">+</span>
+      </summary>
+      <div style="padding:0 22px 20px;color:var(--muted);font-size:.93rem;line-height:1.7">
+        Most gym apps are either too complex — exercise encyclopaedias with hundreds of features — or too strict — daily streaks that a single missed session destroys. Build Momentum is deliberately narrow: a weekly streak that forgives, automatic PR detection, and two-tap logging. No social features, no account, no subscription. Built by someone who lifts, for people who want to keep lifting.
+      </div>
+    </details>
+
+  </div>
+  <script>
+  document.querySelectorAll('#faq details').forEach(function(d){
+    d.addEventListener('toggle',function(){
+      var icon=d.querySelector('.faq-icon');
+      if(icon) icon.style.transform=d.open?'rotate(45deg)':'rotate(0deg)';
+    });
+  });
+  </script>
+</section>
+
 <footer class="wrap">
   <div class="foot">
     <small>Build Momentum — an <b style="color:var(--text)">Onarvo</b> product. © 2026.</small>
     <div>
       <a href="https://apps.apple.com/app/id6780683361" target="_blank" rel="noopener">App Store</a>
+      <a href="#faq">FAQ</a>
       <a href="#waitlist">Waitlist</a>
       <a href="#get">Get the app</a>
     </div>
