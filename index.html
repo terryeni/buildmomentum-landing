@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Build Momentum — The gym streak you can't break</title>
-<meta name="description" content="A dead-simple gym tracker built around a streak that counts by the week, so one missed day never sets you back to zero. Auto-tracks your PRs. No account, fully private. On iPhone." />
+<meta name="description" content="A dead-simple gym tracker built around a streak that counts by the week, so one missed day never sets you back to zero. Auto-tracks your PRs. No account, fully private. Free on iPhone and Android." />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -13,7 +13,7 @@
 <link rel="sitemap" type="application/xml" href="sitemap.xml" />
 <!-- Open Graph -->
 <meta property="og:title" content="Build Momentum — The gym streak you can't break" />
-<meta property="og:description" content="A gym tracker built around a forgiving weekly streak. Auto PRs, visible progress, no account, fully private. Free on iPhone." />
+<meta property="og:description" content="A gym tracker built around a forgiving weekly streak. Auto PRs, visible progress, no account, fully private. Free on iPhone and Android." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://terryeni.github.io/buildmomentum-landing/" />
 <meta property="og:site_name" content="Build Momentum" />
@@ -24,7 +24,7 @@
 <!-- Twitter / X card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Build Momentum — The gym streak you can't break" />
-<meta name="twitter:description" content="A gym tracker built around a forgiving weekly streak. Auto PRs, visible progress, no account, fully private. Free on iPhone." />
+<meta name="twitter:description" content="A gym tracker built around a forgiving weekly streak. Auto PRs, visible progress, no account, fully private. Free on iPhone and Android." />
 <meta name="twitter:image" content="https://terryeni.github.io/buildmomentum-landing/og-image.png" />
 <meta name="theme-color" content="#0B0B0F" />
 <!-- Structured data: helps Google render a rich app result (name, category, price, store link) in search. Verifiable facts only — no rating claimed until real reviews exist. -->
@@ -33,12 +33,12 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Build Momentum",
-  "operatingSystem": "iOS",
+  "operatingSystem": ["iOS", "ANDROID"],
   "applicationCategory": "HealthApplication",
   "description": "A dead-simple gym tracker built around a streak that counts by the week, so one missed day never sets you back to zero. Auto-tracks your PRs. No account, fully private.",
   "url": "https://terryeni.github.io/buildmomentum-landing/",
   "image": "https://terryeni.github.io/buildmomentum-landing/og-image.png",
-  "downloadUrl": "https://apps.apple.com/app/id6780683361",
+  "downloadUrl": ["https://apps.apple.com/app/id6780683361", "https://play.google.com/store/apps/details?id=dev.terryeni.momentum"],
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -215,12 +215,12 @@
 </nav>
 
 <header class="wrap">
-  <span class="pill"><span class="dot"></span> Now on the App Store — free on iPhone</span>
+  <span class="pill"><span class="dot"></span> Now on iOS + Android - free</span>
   <h1>The gym streak <span class="hl">you can't break.</span></h1>
   <p class="sub">Most trackers punish you the second you miss a day — so you quit. Build Momentum counts your streak <b style="color:var(--text)">by the week</b>. Rest days never break it, and a freeze covers one bad week. It auto-catches your PRs and shows your lifts trending up — so progress is finally <b style="color:var(--text)">visible</b>.</p>
   <div class="cta-row" id="get">
-    <a class="btn-store" href="https://apps.apple.com/app/id6780683361" target="_blank" rel="noopener"> Download on the App Store</a>
-    <a class="btn-ghost" href="#waitlist">Get updates &amp; early access →</a>
+    <a class="btn-store" href="https://apps.apple.com/app/id6780683361" target="_blank" rel="noopener">Download on the App Store</a>
+    <a class="btn-store" href="https://play.google.com/store/apps/details?id=dev.terryeni.momentum" target="_blank" rel="noopener">Get it on Google Play</a>
   </div>
   <p class="micro">No account. <b>Fully offline.</b> No ads, no tracking. Your data never leaves your phone.</p>
 </header>
@@ -325,7 +325,7 @@
   <div class="waitlist">
     <span class="eyebrow">Stay in the loop</span>
     <h2>New features. Big releases. No noise.</h2>
-    <p class="lead">Get notified when Android ships, when major features drop, and when there's actually something worth sharing. One email when there's real news — nothing else. Already on iOS? We'll keep you first in line.</p>
+    <p class="lead">Get notified when major features drop and when there is actually something worth sharing. One email when there is real news, nothing else.</p>
     <form id="waitlist-form" novalidate>
       <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required aria-label="Email address" />
       <button type="submit" id="submitbtn">Notify me</button>
@@ -409,8 +409,9 @@
     <small>Build Momentum — an <b style="color:var(--text)">Onarvo</b> product. © 2026.</small>
     <div>
       <a href="https://apps.apple.com/app/id6780683361" target="_blank" rel="noopener">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=dev.terryeni.momentum" target="_blank" rel="noopener">Google Play</a>
       <a href="#faq">FAQ</a>
-      <a href="#waitlist">Waitlist</a>
+      <a href="#waitlist">Updates</a>
       <a href="#get">Get the app</a>
     </div>
   </div>
@@ -468,7 +469,7 @@
     var shareBtn = document.getElementById('share-btn');
     if(shareBtn){
       var shareUrl = 'https://terryeni.github.io/buildmomentum-landing/';
-      var shareText = 'A gym tracker with a weekly streak that doesn\'t punish rest days. Free, offline, no account. Build Momentum — iOS now, Android coming.';
+      var shareText = 'A gym tracker with a weekly streak that doesn\'t punish rest days. Free, offline, no account. Build Momentum — free on iOS and Android.';
       shareBtn.addEventListener('click', function(){
         if(navigator.share){
           navigator.share({ title:'Build Momentum', text:shareText, url:shareUrl }).catch(function(){});
